@@ -27,8 +27,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer shadow */
             padding: 2.5rem;
             animation: fadeIn 0.8s ease-out;
-            display: grid; /* Use grid for columns directly on the card */
-            grid-template-columns: 1fr 1fr; /* Two columns */
+            display: grid; /* Use grid for columns */
+            grid-template-columns: 1fr; /* Default to single column */
             gap: 2.5rem; /* Space between columns */
         }
         @keyframes fadeIn {
@@ -352,10 +352,16 @@
         }
 
 
-        @media (max-width: 768px) { /* Adjust for smaller screens */
+        @media (min-width: 768px) { /* On medium and larger screens */
+            .card {
+                grid-template-columns: 1fr 1fr; /* Two columns */
+            }
+        }
+
+        @media (max-width: 767px) { /* Adjust for smaller screens (mobile) */
             .card {
                 padding: 1.5rem;
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Single column on mobile */
             }
             .input-column, .output-column {
                 max-height: 60vh; /* Adjust height for mobile scrolling */
@@ -392,30 +398,36 @@
 
             <h3 class="text-2xl font-semibold text-orange-600 border-b-2 border-orange-200 pb-2 mb-4 poppins">Your Financial Blueprint</h3>
 
-            <div>
-                <label for="current-age" class="block text-gray-700 text-sm font-medium mb-1">Your Current Age:</label>
-                <input type="range" id="current-age" value="40" min="20" max="60" step="1" class="w-full">
-                <span id="current-age-value" class="text-gray-800 text-sm font-semibold">40 years</span>
-            </div>
-            <div>
-                <label for="retirement-age" class="block text-gray-700 text-sm font-medium mb-1">Desired Retirement Age:</label>
-                <input type="range" id="retirement-age" value="60" min="60" max="75" step="1" class="w-full">
-                <span id="retirement-age-value" class="text-gray-800 text-sm font-semibold">60 years</span>
-            </div>
-            <div>
-                <label for="life-expectancy" class="block text-gray-700 text-sm font-medium mb-1">Life Expectancy:</label>
-                <input type="range" id="life-expectancy" value="85" min="75" max="100" step="1" class="w-full">
-                <span id="life-expectancy-value" class="text-gray-800 text-sm font-semibold">85 years</span>
-            </div>
-            <div>
-                <label for="monthly-expenses" class="block text-gray-700 text-sm font-medium mb-1">Current Monthly Expenses (₹):</label>
-                <input type="range" id="monthly-expenses" value="50000" min="10000" max="200000" step="5000" class="w-full">
-                <span id="monthly-expenses-value" class="text-gray-800 text-sm font-semibold">₹50,000</span>
-            </div>
-            <div>
-                <label for="existing-corpus" class="block text-gray-700 text-sm font-medium mb-1">Existing Retirement Savings (₹):</label>
-                <input type="range" id="existing-corpus" value="2000000" min="0" max="10000000" step="500000" class="w-full">
-                <span id="existing-corpus-value" class="text-gray-800 text-sm font-semibold">₹2,000,000</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                <div class="space-y-4">
+                    <div>
+                        <label for="current-age" class="block text-gray-700 text-sm font-medium mb-1">Your Current Age:</label>
+                        <input type="range" id="current-age" value="40" min="20" max="60" step="1" class="w-full">
+                        <span id="current-age-value" class="text-gray-800 text-sm font-semibold">40 years</span>
+                    </div>
+                    <div>
+                        <label for="retirement-age" class="block text-gray-700 text-sm font-medium mb-1">Desired Retirement Age:</label>
+                        <input type="range" id="retirement-age" value="60" min="60" max="75" step="1" class="w-full">
+                        <span id="retirement-age-value" class="text-gray-800 text-sm font-semibold">60 years</span>
+                    </div>
+                    <div>
+                        <label for="life-expectancy" class="block text-gray-700 text-sm font-medium mb-1">Life Expectancy:</label>
+                        <input type="range" id="life-expectancy" value="85" min="75" max="100" step="1" class="w-full">
+                        <span id="life-expectancy-value" class="text-gray-800 text-sm font-semibold">85 years</span>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label for="monthly-expenses" class="block text-gray-700 text-sm font-medium mb-1">Current Monthly Expenses (₹):</label>
+                        <input type="range" id="monthly-expenses" value="50000" min="10000" max="200000" step="5000" class="w-full">
+                        <span id="monthly-expenses-value" class="text-gray-800 text-sm font-semibold">₹50,000</span>
+                    </div>
+                    <div>
+                        <label for="existing-corpus" class="block text-gray-700 text-sm font-medium mb-1">Existing Retirement Savings (₹):</label>
+                        <input type="range" id="existing-corpus" value="2000000" min="0" max="10000000" step="500000" class="w-full">
+                        <span id="existing-corpus-value" class="text-gray-800 text-sm font-semibold">₹2,000,000</span>
+                    </div>
+                </div>
             </div>
 
             <h3 class="text-2xl font-semibold text-orange-600 border-b-2 border-orange-200 pb-2 mb-4 mt-8 poppins">Your Dream Lifestyle 🌟</h3>
@@ -595,9 +607,14 @@
                 </div>
             </div>
 
-            <button id="simulate-lifestyle-btn" class="w-full px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 transform active:scale-98">
-                Simulate My Future! ✨
-            </button>
+            <div class="flex flex-col md:flex-row gap-4 mt-6">
+                <button id="simulate-lifestyle-btn" class="w-full md:w-auto flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-orange-300 transform active:scale-98">
+                    Simulate My Future! ✨
+                </button>
+                <button id="clear-results-btn" class="w-full md:w-auto flex-1 px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-full shadow-lg hover:bg-gray-300 focus:outline-none focus:ring-4 focus:ring-gray-300 transform active:scale-98">
+                    Clear Results 🔄
+                </button>
+            </div>
         </div>
 
         <!-- Output Column -->
@@ -714,6 +731,7 @@
 
         // --- DOM Elements ---
         const simulateBtn = document.getElementById('simulate-lifestyle-btn');
+        const clearResultsBtn = document.getElementById('clear-results-btn'); // Get the new clear button
         const simulationOutput = document.getElementById('simulation-output');
 
         // Input Sliders
@@ -818,8 +836,7 @@
                 return;
             }
 
-            // ONLY show output column AFTER simulate button is clicked AND inputs are valid
-            simulationOutput.classList.remove('hidden');
+            simulationOutput.classList.remove('hidden'); // Ensure output area is visible on valid simulation
 
 
             const yearsToRetirement = retirementAge - currentAge;
@@ -1183,6 +1200,14 @@
 
         // Event listener for the main simulate button
         simulateBtn.addEventListener('click', updateSimulation);
+
+        // Event listener for the clear results button
+        clearResultsBtn.addEventListener('click', () => {
+            simulationOutput.classList.add('hidden'); // Hide the entire output column
+            marketplaceResultsDisplay.classList.add('hidden'); // Ensure marketplace results are hidden
+            // You can add more cleanup here if needed, e.g., resetting text content of output elements
+        });
+
 
         // Add event listeners for slider inputs to ONLY update their display values (not trigger full simulation)
         const sliderInputs = [
