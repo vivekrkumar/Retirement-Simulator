@@ -27,16 +27,17 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer shadow */
             padding: 2.5rem;
             animation: fadeIn 0.8s ease-out;
-            display: grid; /* Use grid for columns */
-            grid-template-columns: 1fr; /* Default to single column */
-            gap: 2.5rem; /* Space between columns */
+            /* Changed to single column layout */
+            display: flex; /* Use flexbox for single column flow */
+            flex-direction: column; /* Stack items vertically */
+            gap: 2.5rem; /* Space between sections */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Specific styling for the two main content columns */
+        /* Specific styling for the main content columns (now stacked) */
         .input-column, .output-column {
             display: flex;
             flex-direction: column;
@@ -398,7 +399,7 @@
 
             <h3 class="text-2xl font-semibold text-orange-600 border-b-2 border-orange-200 pb-2 mb-4 poppins">Your Financial Blueprint</h3>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            <div class="grid grid-cols-1 gap-x-6 gap-y-4">
                 <div class="space-y-4">
                     <div>
                         <label for="current-age" class="block text-gray-700 text-sm font-medium mb-1">Your Current Age:</label>
