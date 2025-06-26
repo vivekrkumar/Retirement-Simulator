@@ -27,9 +27,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer shadow */
             padding: 2.5rem;
             animation: fadeIn 0.8s ease-out;
-            /* Changed to single column layout */
-            display: flex; /* Use flexbox for single column flow */
-            flex-direction: column; /* Stack items vertically */
+            /* Force single column always */
+            display: flex;
+            flex-direction: column;
             gap: 2.5rem; /* Space between sections */
         }
         @keyframes fadeIn {
@@ -223,7 +223,7 @@
         .choice-card.selected {
             border-color: #ef4444; /* red-500 */
             background-color: #fef2f2; /* red-50 */
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+            box-shadow: 0 44px 15px rgba(239, 68, 68, 0.3);
             transform: translateY(-2px);
         }
         .choice-card img {
@@ -354,15 +354,13 @@
 
 
         @media (min-width: 768px) { /* On medium and larger screens */
-            .card {
-                grid-template-columns: 1fr 1fr; /* Two columns */
-            }
+            /* No two-column grid here, keeping it single column as requested */
         }
 
         @media (max-width: 767px) { /* Adjust for smaller screens (mobile) */
             .card {
                 padding: 1.5rem;
-                grid-template-columns: 1fr; /* Single column on mobile */
+                /* grid-template-columns: 1fr; (already handled by default flex-direction: column) */
             }
             .input-column, .output-column {
                 max-height: 60vh; /* Adjust height for mobile scrolling */
